@@ -1,0 +1,362 @@
+###
+Print 'hello world' with Python from the command line.
+===
+python -c 'print "hello world"'
+
+###
+In `python -m SimpleHTTPServer 2000` what happens to 2000?
+===
+It gets sent as the first argument of the SimpleHTTPServer main function.
+
+###
+What is the program name (`sys.argv[0]`) inside of `python -c 'print "hello
+world"'`?
+===
+`-c`
+
+###
+What is the program name (`sys.argv[0]`) when reading from stdin (`python [-]`)?
+===
+`-`
+
+###
+How would you add a dir to the module search path from the CLI?
+===
+`export PYTHONPATH="/some/path:$PYTHONPATH"`
+
+###
+What is the search order for dirs in `PYTHONPATH`?
+===
+left to right
+
+###
+What is `3 // 2` and `3 / 2` in Python 2?
+===
+1 and 1
+
+###
+What is `3 // 2` and `3 / 2` in Python 3 or with `from __future__ import
+division`?
+===
+1 and 1.5
+===
+
+###
+Which objects don't have a Boolean value?
+===
+None. All do.
+
+###
+Is `None` a constant, construct or a value?
+===
+A value.
+
+###
+Do `and`/`or` operators shortcircuit?
+===
+Yes.
+
+###
+What is the difference between `a < b < c` and `a < b and b < c`?
+===
+`b` is evaluated only once in the first expression.
+
+###
+If you want a custom ordering for your class what methods should you override?
+===
+Either all the comparison methods (`__eq__`, `__gt__`, ...) or just `__lt__` and
+`__eq__` and use `@total_ordering`.
+
+###
+Is it better to implement all the comparison methods (`__eq__`, `__gt__`, ...)
+or just `__cmp__`?
+===
+`__cmp__` is less flexible and was removed in Python 3. You can use
+`@total_ordering` for less typing.
+
+###
+What does `v[:]` return?
+===
+A shallow copy of `v`.
+
+###
+What is the third item (`k`) called in `v[i:j:k]`?
+===
+The stride.
+
+###
+What does this show `print "aa""bb"`?
+===
+aabb
+
+###
+What does this show?
+```
+print "aa"
+    "bb"
+```
+===
+That is a syntax error. `\` or `()` wasn't used.
+
+###
+Are strings mutable?
+===
+No.
+
+###
+What does the builtin `all(iterable)` do?
+===
+Return `True` if all elements of the iterable are true or it's empty.
+
+###
+What does the builtin `any(iterable)` do?
+===
+Return `True` if any element is true, or `False` if empty.
+
+###
+What does the builtin `bin(x)` do?
+===
+Format a number as a binary string (`0bNNN`).
+
+###
+What does the builtin `bool(x)` do?
+===
+Convert the expression to a Boolean.
+
+###
+What does the builtin `bytearray([source[, encoding[, errors]]])` do?
+===
+Return a mutable array of bytes object with methods similar to `str`.
+
+###
+What does the builtin `callable(x)` do?
+===
+Test if `x` is callable.
+
+###
+What does the builtin `classmethod(f)` do?
+===
+A decorator for creating class methods where the class is known to the function.
+
+###
+What does the builtin `staticmethod(f)` do?
+===
+A decorator for creating class methods where the class isn't known to the
+function.
+
+###
+What does the builtin `delattr(o, n)` do?
+===
+Delete the `n` atribute of `o` if `o` allowes it.
+
+###
+What does the `find` method do on strings?
+===
+Return the index of the first match or -1 otherwise.
+
+###
+What does the `index` method do on strings?
+===
+Return the index of the first match or raises ValueError otherwise.
+
+###
+What do the `rindex` and `rfind` methods do on strings?
+===
+The same as `index` and `find` but start from the right.
+
+###
+What does the `count` moethod do on strings?
+===
+Returns the number of nonoverlapping occurrences of the given substring.
+
+###
+What does `'Just an example'.split()` return?
+===
+It splits by whitespace and returns: `['Just', 'an', 'example']`.
+
+###
+Are lists mutable?
+===
+Yes.
+
+###
+How do you prepend list `A` to list `B`?
+===
+`B[:0] = A`
+
+###
+What does the `pop([i])` method of lists do?
+===
+Deletes and returns the last element or `i` if provided.
+
+###
+What does an object need in order to be an iterable?
+===
+It has to implement the `__iter__` method that returns an iterator.
+
+###
+What does an object need in order to be an iterator?
+===
+It has to implement the `next` method (or `__next__` in 3.X) that returns the
+next item or raises `StopIteration`.
+
+###
+What is the proper way to use the iterator/iterable methods (`__iter__`,
+`__next__` or `next`)?
+===
+Using the `next` and `iter` built-in functions.
+
+###
+What are generator expressions?
+===
+Similar to comprehensions, use () instead of [] and do not materialize the
+entire list.
+
+###
+When is it better to use a generator expression over a comprehension?
+===
+Whey you only need to loop over it once or not consume it all.
+
+###
+What is a sentinel value and how do you use one in Python iteration?
+===
+A sentinel value guarantees termination of iteration. You use the `iter(func,
+sentinel)` form for `iter` which calls and returns all of the returns of `func`
+until `sentinel` is found.
+
+###
+What does the else do in the for-else and while-else constructs?
+===
+It is executed everytime after the else, unless the loop is exited by breaking
+out of it.
+
+###
+Why does this work or not work?
+```
+# d is a dict
+for k in d.keys()
+    if k.startswith('r'):
+        del d[k]
+```
+===
+It works because `keys()` returns a copy of the keys so you can modify the dict
+while looping over it.
+
+###
+What is almost always a better option to `dict.items()`?
+===
+`dict.iteritems()` if you don't want to create the whole list.
+
+###
+What does `defaultdict` do?
+===
+It's a subclass of `dict` that calls a factory function to supply missing
+values.
+
+###
+```
+sum(x for x in xrange(3))
+print x
+```
+What happens on `print x`?
+===
+`NameError` because the loop variable is not accessible outside the generator
+expression.
+
+###
+```
+sum([x for x in xrange(3)])
+print x
+```
+What happens on `print x`?
+===
+You get `2` because list comprehensions leave their loop variables to the last
+value.
+
+###
+How do you make a set comprehension of 0 to 9?
+===
+`{x for x in xrange(10)}`
+
+###
+How do you make a dict comprehension of 0 to 9 mapped to their square?
+===
+`{x: x ** 2 for x in xrange(10)}`
+
+###
+What types can be used as `dict` keys?
+===
+All immutable objects and classes that define `__hash__`.
+
+###
+What does dict.keys() do?
+===
+Returns a list of the keys in Python 2 or an iterable in Python 3.
+
+###
+How would you simplify this:
+```
+for x in d.keys():
+    print x
+```
+===
+```
+for x in d:
+    print x
+```
+
+###
+What does dict.values() do?
+===
+Returns a list of values in Python 2 or an iterable in Python 3.
+
+###
+What does dict.items() do?
+===
+Returns a list of `(key, value)` tuples in Python 2 or an iterable in Python 3.
+
+###
+How do you remove all the items in a dict?
+===
+`dict.clear()`
+
+###
+How do you get a shallow copy of a dict?
+===
+`dict.copy()`
+
+###
+How would you merge all the values of dict `d1` into dict `d2`?
+===
+`d2.update(d1)`
+
+###
+How would you add two new items to a dict at once?
+===
+`dict.update(key1='value1', key2='value2')`
+
+###
+What does `dict.get('a')` do?
+===
+Get the value for the key `'a'` or `None` if it doesn't exist.
+
+###
+How would you simplify this?
+
+`dict['x'] if dict.has_key('x') else 'unknown'`
+===
+`dict.get('x', 'unknown')`
+
+###
+What is `lru_cache`?
+===
+It's a caching decorator using the Least Recently Used algorithm.
+
+###
+How is `namedtuple` used?
+===
+```
+Point = namedtuple('Po', 'x y')
+p = Point(1, 2)
+x, y = p
+```
