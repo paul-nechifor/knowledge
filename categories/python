@@ -91,10 +91,9 @@ aabb
 
 ###
 What does this show?
-```
-print "aa"
-    "bb"
-```
+
+    print "aa"
+        "bb"
 ===
 That is a syntax error. `\` or `()` wasn't used.
 
@@ -232,12 +231,11 @@ out of it.
 
 ###
 Why does this work or not work?
-```
-# d is a dict
-for k in d.keys()
-    if k.startswith('r'):
-        del d[k]
-```
+
+    # d is a dict
+    for k in d.keys()
+        if k.startswith('r'):
+            del d[k]
 ===
 It works because `keys()` returns a copy of the keys so you can modify the dict
 while looping over it.
@@ -254,20 +252,18 @@ It's a subclass of `dict` that calls a factory function to supply missing
 values.
 
 ###
-```
-sum(x for x in xrange(3))
-print x
-```
+    sum(x for x in xrange(3))
+    print x
+
 What happens on `print x`?
 ===
 `NameError` because the loop variable is not accessible outside the generator
 expression.
 
 ###
-```
-sum([x for x in xrange(3)])
-print x
-```
+    sum([x for x in xrange(3)])
+    print x
+
 What happens on `print x`?
 ===
 You get `2` because list comprehensions leave their loop variables to the last
@@ -289,29 +285,26 @@ What types can be used as `dict` keys?
 All immutable objects and classes that define `__hash__`.
 
 ###
-What does dict.keys() do?
+What does `dict.keys()` do?
 ===
 Returns a list of the keys in Python 2 or an iterable in Python 3.
 
 ###
 How would you simplify this:
-```
-for x in d.keys():
-    print x
-```
+
+    for x in d.keys():
+        print x
 ===
-```
-for x in d:
-    print x
-```
+    for x in d:
+        print x
 
 ###
-What does dict.values() do?
+What does `dict.values()` do?
 ===
 Returns a list of values in Python 2 or an iterable in Python 3.
 
 ###
-What does dict.items() do?
+What does `dict.items()` do?
 ===
 Returns a list of `(key, value)` tuples in Python 2 or an iterable in Python 3.
 
@@ -355,8 +348,6 @@ It's a caching decorator using the Least Recently Used algorithm.
 ###
 How is `namedtuple` used?
 ===
-```
-Point = namedtuple('Po', 'x y')
-p = Point(1, 2)
-x, y = p
-```
+    Point = namedtuple('Po', 'x y')
+    p = Point(1, 2)
+    x, y = p
