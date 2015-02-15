@@ -351,3 +351,34 @@ How is `namedtuple` used?
     Point = namedtuple('Po', 'x y')
     p = Point(1, 2)
     x, y = p
+
+###
+What does `dict.setdefault` do?
+===
+It's just like `dict.get` but it also updates the value if it didn't exist.
+
+###
+What does `dict.has_key(k)` do?
+===
+Don't use that! Just replace it with `k in dict`.
+
+###
+What is not ideal about the last two lines (in Python 2)?
+
+    d = {x: x * x for x in xrange(9999999)}
+    sum_keys = sum(d.keys())
+    sum_values = sum(d.values())
+===
+`keys` and `values` should be replaced with `iterkeys` and `itervalues` since
+they create the lists instead of using iterators.
+
+###
+What does `tuple('abc')` return?
+===
+`('a', 'b', 'c')`
+
+###
+What is the difference between `file` and `open`?
+===
+`file` is the type and `open` is a factory function. You should always use
+`open` for opening files. `file` is removed in Python 3.
