@@ -382,3 +382,91 @@ What is the difference between `file` and `open`?
 ===
 `file` is the type and `open` is a factory function. You should always use
 `open` for opening files. `file` is removed in Python 3.
+
+###
+Are sets mutable?
+===
+Yes.
+
+###
+Can sets contain mutable values.
+===
+They need to be hashable, but a set shouldn't contain mutable values.
+
+###
+How can you easily define a set containing `1, 2, 3` without the use of `set()`?
+===
+`{1, 2, 3}`
+
+###
+What is the easiest way to define a set of the squares of `range(1, 10)`?
+===
+`{x * x for x in xrange(1, 10)}`
+
+###
+How do you remove item `x` from set `s`?
+===
+`s.remove(x)`
+
+###
+How do you remove item `x` from set `s` if you don't know for sure `x` is in
+`s`?
+===
+`s.discard(x)`
+
+###
+How do you remove all items from a set `s`?
+===
+`s.clear()`
+
+###
+How would you make a shallow copy of  a set?
+===
+`s.copy()`
+
+###
+What are `True` and `False` exactly in Python?
+===
+Predefined variables of type `bool` (a subclass of `int`) which have the values
+`1` and `2`.
+
+###
+What is the difference between `str()` and `repr()`?
+===
+`repr()` is meant to return detailed string version of the object and `str()` is
+meant to be user-friendly.
+
+###
+When could you use a multiline statement without ending the lines with `\`?
+===
+If unclosed `()`, `[]`, or `{}` are used.
+
+###
+What things can the `del` statement be use to delete?
+===
+Variables, items, keys, slices, and attributes.
+
+###
+When is `words` given its value?
+
+    def double_it(s): return s + s
+    def end_talk(words=double_it('bye')): print words
+===
+Once at `def` statement time, so you shouldn't use default arguments if you
+intend to mutate them.
+
+###
+What can decorators be used on?
+===
+Functions, mostly, but classes too.
+
+###
+What is different about functions that contain a `yield` statement?
+===
+They are compiled as generator functions and return a *generator object*.
+
+###
+How can you end the iteration from within a generator function?
+===
+Fall of the end of the function or `return` from it (you can't return any value
+in Python 2).
