@@ -470,3 +470,65 @@ How can you end the iteration from within a generator function?
 ===
 Fall of the end of the function or `return` from it (you can't return any value
 in Python 2).
+
+###
+What are metaclasses?
+===
+Metaclasses are the classes of classes. They are used to build actual classes.
+They are best used to alter what the class statement does.
+
+###
+What are all the keywords in the `try` statement?
+===
+`try-except-else-finally`
+
+###
+When is `else` execute in a `try` statement?
+===
+When no exception occurs.
+
+###
+How can you catch multiple exception types with the instance in a single
+`except` block?
+===
+`except (E1, E2, E3), e:` or with `or` instead of `,`.
+
+###
+What happens if a list in `zip` is shorter than another?
+===
+The longer one is truncated.
+
+###
+What are the context manager protocol methods?
+===
+`__enter__` and `__exit__`.
+
+###
+What is `__all__` used for?
+===
+Limiting star imports (so it should never be used).
+
+###
+What happens to names within a class statement that start with two underscores
+(such as `__foo`)?
+===
+They are mangled to include the class name (like `_ClassName__foo`) in order to
+avoid some collisions but are otherwise not trully private.
+
+###
+What is the inheritence order (DFS or BFS) (with new-style classes)?
+===
+BFS.
+
+###
+How do you make sure a class uses the new-style rather than the classic style?
+===
+Inherit from `object` or any other built-in type.
+
+###
+What happends when you call `bool(x)` where `x` is an instance of a custom
+class `X`?
+===
+`x.__nonzero__` or `x.__len__` are called, if they exist (in that order). If
+neither exists, `bool(x)` returns `True`. (Python 3 uses `__bool__` instead of
+`__nonzero__`.)
