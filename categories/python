@@ -1,7 +1,7 @@
 ###
 Print 'hello world' with Python from the command line.
 ===
-python -c 'print "hello world"'
+    python -c 'print "hello world"'
 
 ###
 In `python -m SimpleHTTPServer 2000` what happens to 2000?
@@ -36,7 +36,7 @@ What is `3 // 2` and `3 / 2` in Python 2?
 
 ###
 What is `3 // 2` and `3 / 2` in Python 3 or with `from __future__ import
-division`?
+division` in Python 2?
 ===
 1 and 1.5
 ===
@@ -52,7 +52,7 @@ Is `None` a constant, construct or a value?
 A value.
 
 ###
-Do `and`/`or` operators shortcircuit?
+Do `and`/`or` operators short-circuit?
 ===
 Yes.
 
@@ -87,7 +87,7 @@ The stride.
 ###
 What does this show `print "aa""bb"`?
 ===
-aabb
+`aabb`
 
 ###
 What does this show?
@@ -146,7 +146,7 @@ function.
 ###
 What does the builtin `delattr(o, n)` do?
 ===
-Delete the `n` atribute of `o` if `o` allowes it.
+Delete the `n` attribute of `o` if `o` allowed it.
 
 ###
 What does the `find` method do on strings?
@@ -164,9 +164,9 @@ What do the `rindex` and `rfind` methods do on strings?
 The same as `index` and `find` but start from the right.
 
 ###
-What does the `count` moethod do on strings?
+What does the `count` method do on strings?
 ===
-Returns the number of nonoverlapping occurrences of the given substring.
+Returns the number of non-overlapping occurrences of the given substring.
 
 ###
 What does `'Just an example'.split()` return?
@@ -226,7 +226,7 @@ until `sentinel` is found.
 ###
 What does the else do in the for-else and while-else constructs?
 ===
-It is executed everytime after the else, unless the loop is exited by breaking
+It is executed every time after the else, unless the loop is exited by breaking
 out of it.
 
 ###
@@ -516,7 +516,7 @@ They are mangled to include the class name (like `_ClassName__foo`) in order to
 avoid some collisions but are otherwise not trully private.
 
 ###
-What is the inheritence order (DFS or BFS) (with new-style classes)?
+What is the inheritance order (DFS or BFS) (with new-style classes)?
 ===
 BFS.
 
@@ -526,9 +526,62 @@ How do you make sure a class uses the new-style rather than the classic style?
 Inherit from `object` or any other built-in type.
 
 ###
-What happends when you call `bool(x)` where `x` is an instance of a custom
+What happens when you call `bool(x)` where `x` is an instance of a custom
 class `X`?
 ===
 `x.__nonzero__` or `x.__len__` are called, if they exist (in that order). If
 neither exists, `bool(x)` returns `True`. (Python 3 uses `__bool__` instead of
 `__nonzero__`.)
+
+###
+What is the root class of the Python exception hierarchy?
+===
+`BaseException` in 3, `Exception` in 2.
+
+###
+What is the difference between `NotImplementedError` and `NotImplemented`?
+===
+`NotImplementedError` is meant to be raised as an exception and `NotImplemented`
+is meant to be returned when operator-overloading methods don't support certain
+operators.
+
+###
+How can you get and use all the writeable attributes of object `x`?
+===
+`x.__dict__`
+
+###
+How can you get the name of class `X` as a string?
+===
+`X.__name__`
+
+###
+How do you get the `PORT` environment variable?
+===
+`os.environ['PORT']`
+
+###
+What will `re.match(r's.*', 'asdf')` return?
+===
+`None` because it doesn't match at the start.
+
+###
+What does `re.search` do?
+===
+Search the entire string (as opposed to `re.match` which starts at the
+beginning).
+
+###
+How would you test that `x` is a string?
+===
+`isinstance(x, str)` or better yet `isinstance(x, basestring)`
+
+###
+What do the `shelve` and `dbm` modules do?
+===
+Basically dictionaries stored as files.
+
+###
+What is the `pickle` module used for?
+===
+Serializing Python objects.
