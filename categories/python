@@ -179,9 +179,10 @@ Are lists mutable?
 Yes.
 
 ###
-How do you prepend list `A` to list `B`?
+Given sequence `a`, how do you insert all its values at the beginning of list
+`b`?
 ===
-`B[:0] = A`
+`b[:0] = a`
 
 ###
 What does the `pop([i])` method of lists do?
@@ -585,3 +586,21 @@ Basically dictionaries stored as files.
 What is the `pickle` module used for?
 ===
 Serializing Python objects.
+
+###
+Given array `a`, how do you randomize the ordering of its elements?
+===
+`random.shuffle(a)`
+
+###
+Given list `l`, how would you pick a random element from it?
+===
+`random.choice(l)`
+
+###
+Given `a` as `a = (some_op(x) for x in list)`, how would you then return a
+random element from `a`?
+===
+An good option (depending on the circumstance) would be
+`random.choice(list(a))`, but you can't use just `a` because `choice` requires a
+list.
