@@ -1,0 +1,124 @@
+###
+How would you `echo` all numbers from 1 until 100 using brace expansion?
+===
+    echo {1..100}
+
+###
+How would you `echo` all *odd* numbers from 1 until 100 using brace expansion?
+===
+    echo {1..100..2}
+
+###
+You have `file037` to `file230` in the current dir. How do you delete them using
+only the `rm` command (considering there are other, unknown, files in the dir)?
+===
+    rm file{037..230}
+
+###
+Can you escape `'` (single quote) within a single quoted string? If so, how?
+===
+No. Everything inside `'` is taken literally until another `'`.
+
+###
+How can you `echo` a tab character without using the `-e` option?
+===
+    echo $'\t'
+
+###
+What is the difference between `{ cmd1; cmd2; }` and `(cmd1; cmd2)`?
+===
+The commands are execute as a group, but `(cmd1; cmd2)` executes them in a
+subshell.
+
+###
+What does this print:
+
+    ! false && echo $?
+===
+    0
+
+###
+Does this print `hello`?
+
+    name=hello
+    cat <<END
+    $name
+    END
+===
+Yes.
+
+###
+How do you stop variables from being interpolated in heredocs, like here:
+
+    cat <<END
+    $name
+    END
+===
+    cat <<'END'
+    $name
+    END
+
+###
+What is the input of `cat` called here:
+
+    cat<<<word
+===
+A herestring.
+
+###
+How do you send output from file descriptor 3 to file descriptor 7 for a command
+called `cmd`?
+===
+    cmd 3>&7
+
+###
+How do you grab input for a command called `cmd` from file descriptor 4?
+===
+    cmd <&4
+
+###
+What does this do?
+
+    cmd 2>&1 | tee f1
+===
+Executes `cmd`, pipes its stderr into stdout, and that's sent to the screen and
+file `f1`.
+
+###
+What does this do?
+
+    cmd <(cmd1; cmd2)
+===
+Opens opens up a named pipe or a file descriptor into which `cmd1; cmd2` is
+executed and `<(...)` (the first argument in this case) gets replaced with the
+path (e.g. `cmd /dev/fd/63`).
+
+###
+What gets printed?
+
+    a=2+3; declare -i b; b=$a; echo $b
+===
+`5`, because `b` is declared as an integer, so the right-hand side gets
+evaluated when `b` is assigned to.
+
+###
+How do you append elements `ccc` and `ddd` to `array` here:
+
+    array=(aaa bbb)
+===
+    array+=(ccc ddd)
+
+###
+What does this do?
+
+    echo ${name:-John Smith}
+===
+Prints the value of `$name` if it is set, otherwise prints `John Smith`.
+
+###
+What does this do?
+
+    echo ${name:=John Smith}
+===
+Prints the value of `$name` if it is set, otherwise prints `John Smith` and sets
+`$name` to `John Smith`.
