@@ -122,3 +122,67 @@ What does this do?
 ===
 Prints the value of `$name` if it is set, otherwise prints `John Smith` and sets
 `$name` to `John Smith`.
+
+###
+What does this do?
+
+    echo ${name:?}
+===
+Prints the value of `$name` if it is set, otherwise it exits and informs that
+`$name` isn't set.
+
+###
+How do you get the PID of the previous command?
+===
+`$!`
+
+###
+Given `a=3 b=5`, how do you `echo` their sum?
+===
+    echo $((a + b))
+
+###
+What does `! cmd | cmd2` do?
+===
+Executes `cmd | cmd2` and negates the exit code of the whole.
+
+###
+What is the null command?
+===
+`:`
+
+###
+What's the difference between test expression (`[ exp ]`) and the extended test
+expression (`[[ exp ]]`)?
+===
+For the extended version, word splitting, filename expansion are disabled and
+additional operators are available: `&&`, `||`, `<`, `>`.
+
+###
+If you have `alias top=htop` in your `.bashrc`, what would be the easiest way of
+opening `top` if you decided you needed it and not `htop`?
+===
+`command top`
+
+###
+What is `eval` used for?
+===
+Executing code that might be in a variable like:
+
+    out='> filename'
+    eval cat /proc/cpuinfo $out
+
+which will output `/proc/cpuinfo` into `filename`.
+
+###
+What does `exec` do?
+===
+Execute commands in place of the current process? It can also be used for
+dealing with redirections.
+
+###
+How would you write an arithmetic for loop that just prints 1-10?
+===
+    for ((i=1; i <= 10; i += 1)); do
+        echo $i
+    done
