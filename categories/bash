@@ -155,8 +155,9 @@ What is the null command?
 What's the difference between test expression (`[ exp ]`) and the extended test
 expression (`[[ exp ]]`)?
 ===
-For the extended version, word splitting, filename expansion are disabled and
-additional operators are available: `&&`, `||`, `<`, `>`.
+For the extended version, word splitting and filename expansion are disabled,
+additional operators are available: `&&`, `||`, `<`, `>`, and you can use `( )`
+for grouping without the need for escaping.
 
 ###
 If you have `alias top=htop` in your `.bashrc`, what would be the easiest way of
@@ -186,3 +187,50 @@ How would you write an arithmetic for loop that just prints 1-10?
     for ((i=1; i <= 10; i += 1)); do
         echo $i
     done
+###
+You have `i` declared as `i=5`. How do you left shift `i` by 3?
+===
+    (( i = i << 3 ))
+
+###
+How do you print all the defined variables?
+===
+`set`
+
+###
+What gets printed in this case: `false | true; echo $?`?
+===
+`0`, because the last command didn't fail.
+
+###
+Running `false | true; echo $?` prints `0` because the last command didn't fail.
+How do you make the whole command (`false | true`) fail if one of them fails?
+===
+`set -o pipefail`
+
+###
+How do you assign `first` and `second` to `$1` and `$2` respectively?
+===
+`set -- first second`
+
+###
+How do you test that string `$name` has a nonzero length?
+===
+`[[ -n $name ]]`
+
+###
+In interactive Bash, how do you make it print `No.` if you try to press `Ctrl+C`
+(interrupt signal)?
+===
+`trap 'echo No.' INT`
+
+###
+For a given command (say `cmd`), how would you find out if it is a function, an
+alias, an external command or other?
+===
+`type cmd`
+
+###
+How do you wait for the most recent background process to finish?
+===
+`wait $!`
