@@ -1,0 +1,231 @@
+###
+From models, views and templates, were is the best place to put more logic?
+===
+Best in models and utility modules, and not in views and templates.
+
+###
+Why is a consistent code style important?
+===
+Understandable code frees mental bandwidth from having to puzzle out
+inconsistencies.
+
+###
+What is a good rule of thumb for the size of a function or method?
+===
+It should fit in a screen without having to scroll.
+
+###
+What is the import order for Django projects?
+===
+* standard library,
+* core Django,
+* third-party modules,
+* and apps from your project.
+
+###
+Is it okay to use different DBs in development and production?
+===
+No.
+
+###
+What is the one place where using star imports is somewhat justifiable?
+===
+Settings files.
+
+###
+What is one of the better places to store secrets for settings?
+===
+In environment variables.
+
+###
+Where is the only place `get_object_or_404` should be used?
+===
+In views only.
+
+###
+Which is better?
+
+Method A:
+
+    urlpatterns = patterns('',
+        url(r'^$', 'polls.views.index', name='index'),
+    )
+
+Method B:
+
+    from . import views
+    urlpatterns = [
+        url(r'^$', views.index, name='index'),
+    ]
+===
+Method B.
+
+###
+What is `TemplateView` meant for?
+===
+Just rendering a template.
+
+###
+What GCBV do you use many to display a single object?
+===
+`DetailView`.
+
+###
+Your app is `myapp` and you have the following view. What template path will it
+render?
+
+    class AuthorCreate(CreateView):
+        model = Author
+        fields = ['name', 'age']
+===
+`'myapp/author_form.html'`
+
+###
+On a subclass of `CreateView`, what method is called if the form is valid? What
+about invalid?
+===
+`form_valid(self, form)` for valid, and `form_invalid(self, form)` for invalid?
+
+###
+On a `ListView`, what method do you need to override to change of returned
+items?
+===
+`get_queryset(self)`
+
+###
+How do you give this field a human-readable name ('q' stands for 'question')
+without changing the attribute name:
+
+    class Question(model.Model):
+        q_text = models.CharField(max_length=200)
+        answer = models.CharField(max_length=200)
+===
+    q_text = models.CharField('question text', max_length=200)
+###
+Is the answer created here saved in the DB after this call?
+
+    question.answer_set.create(text='Iceland')
+===
+Yes.
+
+###
+If you have a `Person` and `Band` models, how do you create a custom
+many-to-many band membership model (so that you can add extra fields to the
+relationship)?
+===
+    class Group(models.Model):
+        members = models.ManyToManyField(Person, through='Membership')
+        # ...
+
+
+    class Membership(models.Model):
+        person = models.ForeignKey(Person)
+        band = models.ForeignKey(Band)
+        # ...
+
+###
+If you have a `Band` and `Person` models, and an intermediary many-to-many model
+called `Membership`, could you create another band member using `create` like in
+the code below?
+
+    band.members.create(name='Joe Blow')
+===
+No.
+
+###
+What is a simple rule for deciding if you should add a method to the `Manager`
+or the class for a certain model?
+===
+Custom model methods are intended for row-level functionality and `Manager`
+methods are intended for table-wide functionality.
+
+###
+What method should you define on a model if an instance of it has a unique URL?
+===
+`get_absolute_url`.
+
+###
+What is the difference between these two queries:
+
+    # 1.
+    Blog.objects.filter(
+        entry__headline__contains='Lennon',
+        entry__pub_date__year=2008,
+    )
+    # 2.
+    Blog.objects.filter(
+        entry__headline__contains='Lennon'
+    ).filter(
+        entry__pub_date__year=2008
+    )
+===
+Case 1 selects blogs that have entries containing `'Lennon'` and those entries
+are from 2008.
+
+Case 2 selects blogs that have at least one entry containing `'Lennon'` and at
+least one entry from 2008.
+
+So in case 1, entries must match both conditions.
+
+###
+Given this model:
+
+    class Comment(models.Model):
+        n_upvotes = IntegerField()
+        n_downvotes = IntegerField()
+        n_replies = IntegerField()
+
+how would you select all comments that have more downvotes than upvotes plus
+replies?
+===
+Comment.object.filter(n_downvotes__gt=F('n_upvotes') + F('n_replies'))
+
+###
+If you have a model called `Comment` and two saved instances called `c1` and
+`c2`, what does `c1 == c2` do?
+===
+Compare the primary keys of the instances are equal (even if the primary key
+isn't called `id`).
+
+###
+If you have a model called `Comment`, how do you delete all the comments from
+the DB?
+===
+    Comment.objects.all().delete()
+
+You have to use `all()` since `delete()` is the only method the model manager
+doesn't expose directly.
+
+###
+Given this model:
+
+    class Comment(models.Model):
+        n_upvotes = IntegerField()
+
+how would you (for every to comment) set `n_upvotes` to 20 if `n_upvotes` is
+larger than 10?
+===
+    Comment.objects.filter(n_upvotes__gt=10).update(n_upvotes=20)
+
+###
+What is the table restriction for updating fields using `update()`?
+===
+You can filter by related tables, but can only update fields in the model's main
+table.
+
+###
+Given this model:
+
+    class Comment(models.Model):
+        n_upvotes = IntegerField()
+
+how would you get the average number of upvotes?
+===
+    Comment.objects.aggregate(Avg('n_upvotes'))
+
+###
+Does the migrate management command migrate all your databases or just the
+default one?
+===
+Just the default one. Others can be specified in turn with
+`--database=<database-aliast>`.
