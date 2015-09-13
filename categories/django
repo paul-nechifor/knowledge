@@ -229,3 +229,31 @@ default one?
 ===
 Just the default one. Others can be specified in turn with
 `--database=<database-aliast>`.
+
+###
+What can you do to prevent users from erroneously and repeatedly seeing 404
+errors?
+===
+Turn on the `BrokenLinkEmailsMiddleware` so that you'll receive emails when
+users see 404s. You can also extend `IGNORABLE_404_URLS` so that you don't get
+emails on errors you expect.
+
+###
+If, when deploying a new app, you need to load some data into the database,
+what's the best way of doing that in new versions of Django?
+===
+Writing a data migration instead of using fixtures or pure SQL.
+
+###
+How would you improve on a view which returns a large amount of data in a
+`HttpResponse`?
+===
+By using a `StreamingHttpResponse` instead.
+
+###
+How would you fix the hardcoding of this static file?
+
+    <img src='/static/myapp/example.jpg'>
+===
+    {% load staticfiles %}
+    <img src='{% static 'myapp/example.jpg' %}'>
