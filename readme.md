@@ -1,0 +1,1 @@
+# This repository has been moved to [gitlab.com/paul-nechifor/knowledge](http://gitlab.com/paul-nechifor/knowledge).
